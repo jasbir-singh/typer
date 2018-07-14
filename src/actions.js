@@ -1,13 +1,13 @@
 const typeStarted = () => ({
   type: 'TYPE_STARTED',
-  state: {
+  payload: {
     startedTypingAt: Date.now(),
   }
 });
 
 const typeSuccess = (key, currentPosition) => ({
   type: 'TYPE_SUCCESS',
-  state: {
+  payload: {
     lastKeyTyped: key.key,
     currentTime: Date.now(),
   }
@@ -15,8 +15,15 @@ const typeSuccess = (key, currentPosition) => ({
 
 const typeFail = (key) => ({
   type: 'TYPE_FAIL',
-  state: {
+  payload: {
     lastKeyTyped: key.key,
+  }
+});
+
+const updateTypingStats = () => ({
+  type: 'UPDATE_TYPING_STATS',
+  payload: {
+    currentTime: Date.now()
   }
 });
 
@@ -24,4 +31,5 @@ export {
   typeSuccess,
   typeStarted,
   typeFail,
+  updateTypingStats,
 }

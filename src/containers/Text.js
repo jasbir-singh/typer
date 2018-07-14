@@ -9,8 +9,7 @@ import {
 import styled from 'styled-components';
 import Paragraph from '../components/Paragraph';
 
-const  StyledText = styled.div`
-`;
+const  StyledText = styled.div``;
 
 class Text extends Component {
   constructor(props) {

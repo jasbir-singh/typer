@@ -12,6 +12,7 @@ const StyledApp = styled.div`
   flex-direction: column;
   width: 50%
 `;
+
 class App extends Component {
   render() {
     return (

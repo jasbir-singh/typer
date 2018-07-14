@@ -14,16 +14,21 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
-  case 'STARTED_TYPING':
+  case 'UPDATE_TYPING_STATS':
     return {
       ...state,
-      ...action.state,
+      ...action.payload
+    };
+  case 'TYPE_STARTED':
+    return {
+      ...state,
+      ...action.payload,
     };
   case 'TYPE_SUCCESS':
     const newCurrentPosition = state.currentPosition + 1;
     return {
       ...state,
-      ...action.state,
+      ...action.payload,
       currentPosition: newCurrentPosition,
       charToType: state.text[0][newCurrentPosition],
       errorPosition: null,
@@ -31,7 +36,7 @@ export default (state = initialState, action) => {
   case 'TYPE_FAIL':
     return {
       ...state,
-      ...action.state,
+      ...action.payload,
       errorPosition: state.currentPosition,
     };
   default:
