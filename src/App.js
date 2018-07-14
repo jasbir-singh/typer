@@ -6,15 +6,27 @@ const StyledApp = styled.div`
   margin: auto;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-content: center;
+  line-height: 2em;
+  flex-direction: column;
+  width: 50%
 `;
+
+const TypingStats = ({ charsTyped }) => (
+  <div>
+    <p>
+      Characters typed: {charsTyped}
+    </p>
+  </div>
+)
 
 class App extends Component {
   render() {
     return (
-      <div className="App container">
+      <StyledApp className="App container">
         <Text />
-      </div>
+        <TypingStats />
+      </StyledApp>
     );
   }
 }

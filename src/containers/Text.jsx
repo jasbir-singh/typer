@@ -2,10 +2,26 @@ import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import './Text.css';
 import { handleOnKeyPress  } from '../actions';
+import styled from 'styled-components';
 
-const Paragraph = ({ text, currentPosition, currentPara }) => {
+const  StyledText = styled.div`
+`;
+
+const Paragraph = ({ text, currentPosition, currentPara, errorPosition }) => {
   const charToClass = (index) => {
-    return (((index === currentPosition) && currentPara) ? 'current-char' : '');
+    if ((index === currentPosition) && currentPara) {
+      return 'current-char';
+    } else {
+      return '';
+    };
+  };
+
+  const errorToClass = (index) => {
+    if ((errorPosition === index) && currentPara) {
+      return 'error';
+    } else {
+      return '';
+    };
   };
 
   return (
@@ -17,7 +33,7 @@ const Paragraph = ({ text, currentPosition, currentPara }) => {
             (char, j) => (
               <span
                 key={j}
-                className={`index-${j} ${charToClass(j)}`}>
+                className={`index-${j} ${charToClass(j)} ${errorToClass(j)}`}>
                 { char }
               </span>
             )
@@ -45,7 +61,7 @@ class Text extends Component {
   }
 
   paragraphs() {
-    const { text, currentPosition, currentPara } = this.props;
+    const { text, currentPosition, currentPara, errorPosition } = this.props;
 
     return this
       .props
@@ -54,6 +70,7 @@ class Text extends Component {
         (<Paragraph
            key={i}
            text={t}
+           errorPosition={errorPosition}
            currentPosition={currentPosition}
            currentPara={i === currentPara}
            className={`para-${i}`}> >
@@ -64,11 +81,11 @@ class Text extends Component {
 
   render() {
     return (
-      <div>
+      <StyledText>
         {
           this.paragraphs()
         }
-      </div>
+      </StyledText>
     );
   }
 }
@@ -79,6 +96,7 @@ export default connect(
     currentPosition: state.currentPosition,
     currentPara: state.currentPara,
     charToType: state.charToType,
+    errorPosition: state.errorPosition,
   })),
   {
     handleOnKeyPress

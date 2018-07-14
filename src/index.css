@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  /* background-color: #FFEDD7; */
   background-color: #FFEDD7;
   font-family: "Source Sans Pro","Roboto","Open Sans",Arial,sans-serif;
 }
@@ -9,4 +10,8 @@ body {
   text-decoration: underline;
   font-size: xx-large;
   font-weight: bolder;
+}
+
+.error {
+  background-color: red;
 }
