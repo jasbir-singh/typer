@@ -1,21 +1,27 @@
-const typeSuccess = (key) => ({
+const typeStarted = () => ({
+  type: 'TYPE_STARTED',
+  state: {
+    startedTypingAt: Date.now(),
+  }
+});
+
+const typeSuccess = (key, currentPosition) => ({
   type: 'TYPE_SUCCESS',
-  key: key.key
+  state: {
+    lastKeyTyped: key.key,
+    currentTime: Date.now(),
+  }
 });
 
 const typeFail = (key) => ({
   type: 'TYPE_FAIL',
-  key: key.key
+  state: {
+    lastKeyTyped: key.key,
+  }
 });
 
-const handleOnKeyPress = (key, charToType) => {
-  if (key.key === charToType) {
-    return typeSuccess(key);
-  } else {
-    return typeFail(key, charToType);
-  };
-};
-
 export {
-  handleOnKeyPress
+  typeSuccess,
+  typeStarted,
+  typeFail,
 }

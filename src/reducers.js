@@ -14,19 +14,24 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
-  case 'TYPE_SUCCESS':
+  case 'STARTED_TYPING':
     return {
       ...state,
-      key: action.key,
-      lastKeyTyped: action.key,
-      currentPosition: state.currentPosition + 1,
-      charToType: state.text[0][state.currentPosition + 1],
+      ...action.state,
+    };
+  case 'TYPE_SUCCESS':
+    const newCurrentPosition = state.currentPosition + 1;
+    return {
+      ...state,
+      ...action.state,
+      currentPosition: newCurrentPosition,
+      charToType: state.text[0][newCurrentPosition],
       errorPosition: null,
     };
   case 'TYPE_FAIL':
     return {
       ...state,
-      lastKeyTyped: action.key,
+      ...action.state,
       errorPosition: state.currentPosition,
     };
   default:

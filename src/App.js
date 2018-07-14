@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Text from './containers/Text';
+import TypingStats from './containers/TypingStats';
 
 const StyledApp = styled.div`
   margin: auto;
@@ -11,15 +12,6 @@ const StyledApp = styled.div`
   flex-direction: column;
   width: 50%
 `;
-
-const TypingStats = ({ charsTyped }) => (
-  <div>
-    <p>
-      Characters typed: {charsTyped}
-    </p>
-  </div>
-)
-
 class App extends Component {
   render() {
     return (
