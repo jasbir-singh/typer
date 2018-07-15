@@ -6,9 +6,9 @@ import {
   typeStarted,
   typeFail,
   typeFinished,
-} from '../actions';
+} from './actions';
 import styled from 'styled-components';
-import Paragraph from '../components/Paragraph';
+import Paragraph from './Paragraph';
 
 const  StyledText = styled.div``;
 

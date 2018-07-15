@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateTypingStats } from '../actions';
+import { updateTypingStats } from './actions';
 
 class TypingStats extends Component {
   componentDidMount() {

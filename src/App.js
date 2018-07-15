@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Text from './containers/Text';
-import TypingStats from './containers/TypingStats';
+import Text from './Text';
+import TypingStats from './TypingStats';
 import { connect } from 'react-redux';
 
 const StyledApp = styled.div`
