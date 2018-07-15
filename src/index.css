@@ -2,11 +2,5 @@ body {
   margin: 0;
   padding: 0;
   background-color: #FFEDD7;
-  /* background-color: #E81C4F; */
   font-family: "Source Sans Pro","Roboto","Open Sans",Arial,sans-serif;
-}
-
-.error {
-  background-color: red;
-  color: white;
 }

@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
-import './Text.css';
 import {
   typeSuccess,
   typeStarted,
@@ -10,7 +9,10 @@ import {
 import styled from 'styled-components';
 import Paragraph from './Paragraph';
 
-const  StyledText = styled.div``;
+const  StyledText = styled.div`
+  line-height: 2em;
+  font-size: 1.6em;
+`;
 
 class Text extends Component {
   constructor(props) {

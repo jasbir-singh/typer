@@ -9,7 +9,6 @@ const StyledApp = styled.div`
   display: flex;
   justify-content: center;
   align-content: center;
-  line-height: 2em;
   flex-direction: column;
   width: 50%
 `;

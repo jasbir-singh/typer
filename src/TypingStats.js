@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateTypingStats } from './actions';
+import styled from 'styled-components';
+
+
+const StyledTypingStats = styled.div`
+  p {
+    margin: 0;
+    line-height: 1em;
+  }
+`;
 
 class TypingStats extends Component {
   componentDidMount() {
@@ -35,17 +44,19 @@ class TypingStats extends Component {
     const cpm = minutesSinceTyping ? Math.round(charsTyped / minutesSinceTyping, 2) : 0;
     const wpm = Math.round(cpm/numberOfCharsinAWord, 2);
 
-    return (<div>
-      <p>
-        Chars typed: { charsTyped }
-      </p>
-      <p>
-        CPM: { cpm }
-      </p>
-      <p>
-        WPM: { wpm }
-      </p>
-    </div>);
+    return (
+      <StyledTypingStats>
+        <p>
+          Chars typed: { charsTyped }
+        </p>
+        <p>
+          CPM: { cpm }
+        </p>
+        <p>
+          WPM: { wpm }
+        </p>
+      </StyledTypingStats>
+    );
   }
 }
 
