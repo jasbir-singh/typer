@@ -2,6 +2,7 @@ import {
   TYPE_STARTED,
   TYPE_SUCCESS,
   TYPE_FAIL,
+  TYPE_FINISHED,
   UPDATE_TYPING_STATS,
 } from './actions';
 // import { combineReducers } from 'redux';
@@ -18,7 +19,9 @@ const initialState = {
   text: text,
   currentPosition: 0,
   currentPara: 0,
-  charToType: text[0][0]
+  numberOfErrors: 0,
+  charToType: text[0][0],
+  typingFinished: false,
 };
 
 export default (state = initialState, action) => {
@@ -32,6 +35,13 @@ export default (state = initialState, action) => {
     return {
       ...state,
       ...action.payload,
+    };
+  case TYPE_FINISHED:
+    return {
+      ...state,
+      ...action.payload,
+      typingFinished: true,
+      typingStarted: false,
     };
   case TYPE_SUCCESS:
     let currentPara;
@@ -55,6 +65,7 @@ export default (state = initialState, action) => {
     return {
       ...state,
       ...action.payload,
+      numberOfErrors: state.numberOfErrors + 1,
       errorPosition: state.currentPosition,
     };
   default:

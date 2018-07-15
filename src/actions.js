@@ -1,7 +1,8 @@
-export const TYPE_STARTED = Symbol();
-export const TYPE_SUCCESS = Symbol();
-export const TYPE_FAIL = Symbol();
-export const UPDATE_TYPING_STATS = Symbol();
+export const TYPE_STARTED = 'TYPE_STARTED';
+export const TYPE_SUCCESS = 'TYPE_SUCESS';
+export const TYPE_FAIL = 'TYPE_FAIL';
+export const UPDATE_TYPING_STATS = 'UPDATE_TYPING_STATS';
+export const TYPE_FINISHED = 'TYPE_FINISHED';
 
 const typeStarted = () => ({
   type: TYPE_STARTED,
@@ -25,6 +26,11 @@ const typeFail = (key) => ({
   }
 });
 
+const typeFinished = () => ({
+  type: TYPE_FINISHED,
+  payload: {}
+});
+
 const updateTypingStats = () => ({
   type: UPDATE_TYPING_STATS,
   payload: {
@@ -36,5 +42,6 @@ export {
   typeSuccess,
   typeStarted,
   typeFail,
+  typeFinished,
   updateTypingStats,
 }

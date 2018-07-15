@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateTypingStats } from '../actions';
 
-const numberOfCharsinAWord = 5;
-
 class TypingStats extends Component {
   componentDidMount() {
     this.startLoop();
@@ -31,10 +29,11 @@ class TypingStats extends Component {
   }
 
   render() {
+    const numberOfCharsinAWord = 5;
     const { startedTypingAt, charsTyped, currentTime } = this.props;
     const minutesSinceTyping = (currentTime - startedTypingAt)/(60*1000);
     const cpm = minutesSinceTyping ? Math.round(charsTyped / minutesSinceTyping, 2) : 0;
-    const wpm = Math.round(cpm/5, 2);
+    const wpm = Math.round(cpm/numberOfCharsinAWord, 2);
 
     return (<div>
       <p>

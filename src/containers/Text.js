@@ -5,6 +5,7 @@ import {
   typeSuccess,
   typeStarted,
   typeFail,
+  typeFinished,
 } from '../actions';
 import styled from 'styled-components';
 import Paragraph from '../components/Paragraph';
@@ -18,17 +19,24 @@ class Text extends Component {
 
   keyPress(key) {
     const {
+      text,
       currentPosition,
+      currentPara,
       charToType,
       typeStarted,
       typeSuccess,
       typeFail,
+      typeFinished
     } = this.props;
 
     if (currentPosition === 0) typeStarted();
 
     if (key.key === charToType) {
-      typeSuccess(key, currentPosition);
+      if ((currentPara === (text.length - 1)) && (text[currentPara].length - 1 === currentPosition)) {
+        typeFinished();
+      } else {
+        typeSuccess(key, currentPosition);
+      };
     } else {
       typeFail(key, charToType);
     };
@@ -57,9 +65,14 @@ class Text extends Component {
            (<Paragraph
             key={i}
             text={t}
-            errorPosition={errorPosition}
-            currentPosition={currentPosition}
-            currentPara={i === currentPara}
+            {
+              ...{
+                errorPosition,
+                currentPosition,
+                currentPara,
+              }
+            }
+            paraIndex={i}
             className={`para-${i}`}> >
             </Paragraph>
            )
@@ -85,11 +98,14 @@ const mapStateToProps = state => ({
   errorPosition: state.errorPosition,
 });
 
+const mapDispatchToProps = {
+  typeSuccess,
+  typeStarted,
+  typeFail,
+  typeFinished,
+};
+
 export default connect(
   mapStateToProps,
-  {
-    typeSuccess,
-    typeStarted,
-    typeFail,
-  }
+  mapDispatchToProps,
 )(Text);
