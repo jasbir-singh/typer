@@ -19,18 +19,12 @@ const StyledParagraph = styled.div`
 
 const Paragraph = ({ text, currentPosition, currentPara, errorPosition, paraIndex }) => {
   const charToClass = (index) => {
-    if ((index === currentPosition) && currentPara === paraIndex) {
+    if ((errorPosition === index) && (currentPara === paraIndex)) {
+      return 'char--current char--error';
+    } else if ((index === currentPosition) && (currentPara === paraIndex)) {
       return 'char--current';
     } else if ((paraIndex < currentPara) || ((paraIndex === currentPara) && (index < currentPosition))) {
       return 'char--correctly-typed'
-    } else {
-      return '';
-    };
-  };
-
-  const errorToClass = (index) => {
-    if ((errorPosition === index) && (currentPara === paraIndex)) {
-      return 'char--error';
     } else {
       return '';
     };
@@ -45,7 +39,7 @@ const Paragraph = ({ text, currentPosition, currentPara, errorPosition, paraInde
             (char, j) => (
               <span
                 key={j}
-                className={`index-${j} ${charToClass(j)} ${errorToClass(j)}`}>
+                className={`${charToClass(j)}`}>
                 { char }
               </span>
             )

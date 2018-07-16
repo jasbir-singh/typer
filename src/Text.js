@@ -10,8 +10,9 @@ import styled from 'styled-components';
 import Paragraph from './Paragraph';
 
 const  StyledText = styled.div`
-  line-height: 2em;
-  font-size: 1.6em;
+  line-height: 1.6em;
+  font-size: 1.2em;
+  margin-bottom: 2em;
 `;
 
 class Text extends Component {

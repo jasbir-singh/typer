@@ -3,11 +3,40 @@ import { connect } from 'react-redux';
 import { updateTypingStats } from './actions';
 import styled from 'styled-components';
 
+const CurrentlyTypedStats = ({
+  charsTyped,
+  minutesSinceTyping,
+  numberOfErrors,
+  wpm,
+  cpm,
+}) => (
+  <StyledTypingStats>
+    <p>
+      Chars to type: { charsTyped }
+    </p>
+    <p>
+      Chars incorrectly typed: { numberOfErrors }
+    </p>
+    <p>
+      Chars typed: { charsTyped }
+    </p>
+    <p>
+      CPM: { cpm }
+    </p>
+    <p>
+      WPM: { wpm }
+    </p>
+    <p>
+      Elapsed Time (in mins): { roundTo2Dp(minutesSinceTyping) }
+    </p>
+  </StyledTypingStats>
+)
 
 const StyledTypingStats = styled.div`
   p {
-    margin: 0;
-    line-height: 1em;
+  margin-bottom: 0;
+  margin-top: 0;
+  line-height: 1em;
   }
 `;
 
@@ -33,38 +62,50 @@ class TypingStats extends Component {
   }
 
   stopLoop() {
+    console.log('Stop loop');
     clearInterval(this._loop);
     /* window.cancelAnimationFrame(this._loop); */
   }
 
   render() {
-    const numberOfCharsinAWord = 5;
-    const { startedTypingAt, charsTyped, currentTime } = this.props;
-    const minutesSinceTyping = (currentTime - startedTypingAt)/(60*1000);
-    const cpm = minutesSinceTyping ? Math.round(charsTyped / minutesSinceTyping, 2) : 0;
-    const wpm = Math.round(cpm/numberOfCharsinAWord, 2);
+    if (this.props.typingFinished) this.stopLoop();
 
     return (
-      <StyledTypingStats>
-        <p>
-          Chars typed: { charsTyped }
-        </p>
-        <p>
-          CPM: { cpm }
-        </p>
-        <p>
-          WPM: { wpm }
-        </p>
-      </StyledTypingStats>
+      <CurrentlyTypedStats {...this.props} />
     );
   }
 }
 
-const mapStateToProps = state => ({
-  startedTypingAt: state.startedTypingAt,
-  charsTyped: state.currentPosition,
-  currentTime: state.currentTime,
-});
+const numberOfCharsinAWord = 5;
+const sum = (arr) => arr.reduce((a, b) => a + b, 0);
+const roundTo2Dp = (num) => Math.round(num, 2);
+
+const mapStateToProps = (
+  {
+    numberOfErrors,
+    text,
+    currentPara,
+    startedTypingAt,
+    currentPosition,
+    currentTime,
+    typingFinished
+  }
+) => {
+  const minutesSinceTyping = ((currentTime - startedTypingAt)/(60*1000)) || 0;
+  const charsTyped = sum(text.slice(0, currentPara).map(x => x.length)) + currentPosition;
+  const cpm = charsTyped && minutesSinceTyping ? Math.round(charsTyped / minutesSinceTyping, 2) : 0;
+  const wpm = Math.round(cpm/numberOfCharsinAWord, 2);
+  const typeableChars = sum(text.map(x => x.length));
+
+  return {
+    typingFinished,
+    charsTyped,
+    minutesSinceTyping,
+    numberOfErrors,
+    wpm,
+    cpm,
+  }
+};
 
 export default connect(
   mapStateToProps,

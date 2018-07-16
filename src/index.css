@@ -3,4 +3,5 @@ body {
   padding: 0;
   background-color: #FFEDD7;
   font-family: "Source Sans Pro","Roboto","Open Sans",Arial,sans-serif;
+  min-height: 100%;
 }

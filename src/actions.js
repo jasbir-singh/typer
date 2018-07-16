@@ -15,7 +15,7 @@ const typeSuccess = (key, currentPosition) => ({
   type: TYPE_SUCCESS,
   payload: {
     lastKeyTyped: key.key,
-    currentTime: Date.now(),
+    // currentTime: Date.now(),
   }
 });
 

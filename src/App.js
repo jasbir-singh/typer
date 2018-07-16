@@ -5,17 +5,25 @@ import TypingStats from './TypingStats';
 import { connect } from 'react-redux';
 
 const StyledApp = styled.div`
-  margin: auto;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  height: 40vh;
+  padding: 25%;
+
   display: flex;
+  align-items: center;
   justify-content: center;
-  align-content: center;
-  flex-direction: column;
-  width: 50%
 `;
 
 class App extends Component {
   typingSummary() {
-    return (<TypingStats />);
+    return (
+      <div>
+        <p>Summary Statistics</p>
+        <TypingStats />
+      </div>
+    );
   }
 
   currentlyTyping() {
@@ -28,15 +36,16 @@ class App extends Component {
   }
   render() {
     const { typingFinished } = this.props;
+    console.log(`Typing finished ${typingFinished}`);
     return (
-      <StyledApp className="App container">
-        { typingFinished ? this.typingSummary() :  this.currentlyTyping() }
+      <StyledApp className="App flex-container">
+          { typingFinished ? this.typingSummary() :  this.currentlyTyping() }
       </StyledApp>
     );
   }
 }
 
-const mapStateToProps = (state) => ({ typingFinished: state.typingFinshed });
+const mapStateToProps = (state) => ({ typingFinished: state.typingFinished });
 
 export default connect(
   mapStateToProps,
