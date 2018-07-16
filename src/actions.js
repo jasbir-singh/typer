@@ -38,10 +38,15 @@ const updateTypingStats = () => ({
   }
 });
 
+const fetchRandomArticle = () => ({
+  type: 'FETCH_RANDOM_ARTICLE',
+});
+
 export {
   typeSuccess,
   typeStarted,
   typeFail,
   typeFinished,
   updateTypingStats,
+  fetchRandomArticle,
 }

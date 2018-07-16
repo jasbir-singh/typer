@@ -5,6 +5,7 @@ import {
   typeStarted,
   typeFail,
   typeFinished,
+  fetchRandomArticle,
 } from './actions';
 import styled from 'styled-components';
 import Paragraph from './Paragraph';
@@ -46,6 +47,7 @@ class Text extends Component {
   }
 
   componentDidMount() {
+    this.props.fetchRandomArticle();
     document.addEventListener('keypress', this.keyPress.bind(this), false);
   }
 
@@ -106,6 +108,7 @@ const mapDispatchToProps = {
   typeStarted,
   typeFail,
   typeFinished,
+  fetchRandomArticle,
 };
 
 export default connect(

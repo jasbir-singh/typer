@@ -8,8 +8,7 @@ const StyledApp = styled.div`
   height: 100%;
   padding: 0;
   margin: 0;
-  height: 10vh;
-  padding: 25%;
+  padding: 5% 20% ;
 
   display: flex;
   align-items: center;
