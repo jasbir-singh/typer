@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Text from './Text';
 import TypingStats from './TypingStats';
 import { connect } from 'react-redux';
+import WikipediaButton from './WikipediaButton';
 
 const StyledApp = styled.div`
   height: 100%;
@@ -30,6 +31,7 @@ class App extends Component {
       <div>
         <Text />
         <TypingStats />
+        <WikipediaButton />
       </div>
     )
   }

@@ -47,7 +47,6 @@ class Text extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchRandomArticle();
     document.addEventListener('keypress', this.keyPress.bind(this), false);
   }
 
@@ -90,6 +89,7 @@ class Text extends Component {
         {
           this.paragraphs()
         }
+        <p><em>{this.props.title}</em></p>
       </StyledText>
     );
   }
@@ -97,6 +97,7 @@ class Text extends Component {
 
 const mapStateToProps = state => ({
   text: state.text,
+  title: state.title,
   currentPosition: state.currentPosition,
   currentPara: state.currentPara,
   charToType: state.charToType,

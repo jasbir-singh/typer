@@ -1,9 +1,13 @@
+import * as API from './api';
 export const TYPE_STARTED = 'TYPE_STARTED';
 export const TYPE_SUCCESS = 'TYPE_SUCESS';
 export const TYPE_FAIL = 'TYPE_FAIL';
 export const UPDATE_TYPING_STATS = 'UPDATE_TYPING_STATS';
 export const TYPE_FINISHED = 'TYPE_FINISHED';
+export const FETCH_RANDOM_ARTICLE_SUCCESS = 'FETCH_RANDOM_ARTICLE_SUCCESS';
 
+//
+// https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=Stack%20Overflow
 const typeStarted = () => ({
   type: TYPE_STARTED,
   payload: {
@@ -38,9 +42,7 @@ const updateTypingStats = () => ({
   }
 });
 
-const fetchRandomArticle = () => ({
-  type: 'FETCH_RANDOM_ARTICLE',
-});
+const fetchRandomArticle = () => ({ type: 'FETCH_RANDOM_ARTICLE' });
 
 export {
   typeSuccess,
