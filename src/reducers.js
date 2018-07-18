@@ -5,6 +5,7 @@ import {
   TYPE_FINISHED,
   UPDATE_TYPING_STATS,
   FETCH_RANDOM_ARTICLE_SUCCESS,
+  FETCH_RANDOM_ARTICLE
 } from './actions';
 // import { combineReducers } from 'redux';
 
@@ -27,6 +28,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch(action.type) {
+  case FETCH_RANDOM_ARTICLE:
   case FETCH_RANDOM_ARTICLE_SUCCESS:
   case UPDATE_TYPING_STATS:
   case TYPE_STARTED:

@@ -5,6 +5,7 @@ export const TYPE_FAIL = 'TYPE_FAIL';
 export const UPDATE_TYPING_STATS = 'UPDATE_TYPING_STATS';
 export const TYPE_FINISHED = 'TYPE_FINISHED';
 export const FETCH_RANDOM_ARTICLE_SUCCESS = 'FETCH_RANDOM_ARTICLE_SUCCESS';
+export const FETCH_RANDOM_ARTICLE = 'FETCH_RANDOM_ARTICLE';
 
 //
 // https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=Stack%20Overflow
@@ -42,7 +43,7 @@ const updateTypingStats = () => ({
   }
 });
 
-const fetchRandomArticle = () => ({ type: 'FETCH_RANDOM_ARTICLE' });
+const fetchRandomArticle = () => ({ type: 'FETCH_RANDOM_ARTICLE', payload: { loading: true } });
 
 export {
   typeSuccess,

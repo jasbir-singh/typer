@@ -4,6 +4,7 @@ import Text from './Text';
 import TypingStats from './TypingStats';
 import { connect } from 'react-redux';
 import WikipediaButton from './WikipediaButton';
+import Spinner from 'react-spinkit';
 
 const StyledApp = styled.div`
   height: 100%;
@@ -29,12 +30,15 @@ class App extends Component {
   currentlyTyping() {
     return (
       <div>
-        <Text />
+        {
+          this.props.loading ? <Spinner style={ { width:'50%', height: '10rem' } } name="ball-clip-rotate-multiple" /> : <Text />
+        }
         <TypingStats />
         <WikipediaButton />
       </div>
     )
   }
+
   render() {
     const { typingFinished } = this.props;
     console.log(`Typing finished ${typingFinished}`);
@@ -46,7 +50,10 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ typingFinished: state.typingFinished });
+const mapStateToProps = (state) => ({
+  typingFinished: state.typingFinished,
+  loading: state.loading
+});
 
 export default connect(
   mapStateToProps,
