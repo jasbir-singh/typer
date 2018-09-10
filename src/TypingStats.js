@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { updateTypingStats } from './actions';
 
 const TypingStatsBar = ({
-  charsToType,
-  timeElapsed,
-  numberOfErrors,
-  wpm,
-  cpm,
+charsToType,
+timeElapsed,
+numberOfErrors,
+wpm,
+cpm,
 }) => (
-  <div className="d-flex align-content-center mt-4 mb-4">
-    <div className="border flex-fill">
+<div className="d-flex align-content-center mt-4 mb-4">
+  <div className="border flex-fill">
       <span style={{ fontSize: '3rem' }}>
         { wpm }
       </span>
@@ -58,7 +58,7 @@ class TypingStats extends Component {
 
   startLoop() {
     if (!this._loop) {
-      this._loop = setInterval(this.loop.bind(this), 500);
+      this._loop = setInterval(this.loop.bind(this), 800);
       /* this._loop = window.requestAnimationFrame(this.loop.bind(this)); */
     }
   }
