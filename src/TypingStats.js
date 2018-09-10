@@ -1,45 +1,51 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateTypingStats } from './actions';
-import styled from 'styled-components';
 
-const CurrentlyTypedStats = ({
-  typeableChars,
-  charsTyped,
-  minutesSinceTyping,
+const TypingStatsBar = ({
+  charsToType,
+  timeElapsed,
   numberOfErrors,
   wpm,
   cpm,
 }) => (
-  <StyledTypingStats>
-    <p>
-      Chars to type: { typeableChars - charsTyped }
-    </p>
-    <p>
-      Chars incorrectly typed: { numberOfErrors }
-    </p>
-    <p>
-      Chars typed: { charsTyped }
-    </p>
-    <p>
-      CPM: { cpm }
-    </p>
-    <p>
-      WPM: { wpm }
-    </p>
-    <p>
-      Elapsed Time (in mins): { roundTo2Dp(minutesSinceTyping) }
-    </p>
-  </StyledTypingStats>
-)
+  <div className="d-flex align-content-center mt-4 mb-4">
+    <div className="border flex-fill">
+      <span style={{ fontSize: '3rem' }}>
+        { wpm }
+      </span>
+      WPM
+    </div>
 
-const StyledTypingStats = styled.div`
-  p {
-  margin-bottom: 0;
-  margin-top: 0;
-  line-height: 1em;
-  }
-`;
+    <div className="border flex-fill">
+      <span style={{ fontSize: '3rem' }}>
+        { cpm }
+      </span>
+      CPM
+    </div>
+
+    <div className="border flex-fill">
+      <span style={{ fontSize: '3rem' }}>
+        { timeElapsed || 0 }
+      </span>
+      s elapsed
+    </div>
+
+    <div className="border flex-fill">
+      <span style={{ fontSize: '3rem' }}>
+        { charsToType }
+      </span>
+      chars to type
+    </div>
+
+    <div className="border flex-fill">
+      <span style={{ fontSize: '3rem' }}>
+        { numberOfErrors }
+      </span>
+      errors
+    </div>
+  </div>
+);
 
 class TypingStats extends Component {
   componentDidMount() {
@@ -72,7 +78,7 @@ class TypingStats extends Component {
     if (this.props.typingFinished) this.stopLoop();
 
     return (
-      <CurrentlyTypedStats {...this.props} />
+      <TypingStatsBar {...this.props} />
     );
   }
 }
@@ -92,17 +98,17 @@ const mapStateToProps = (
     typingFinished
   }
 ) => {
-  const minutesSinceTyping = ((currentTime - startedTypingAt)/(60*1000)) || 0;
+  const timeElapsed = (currentTime - startedTypingAt)/1000;
+  const minutesSinceTyping = (timeElapsed/60) || 0;
   const charsTyped = sum(text.slice(0, currentPara).map(x => x.length)) + currentPosition;
   const cpm = charsTyped && minutesSinceTyping ? Math.round(charsTyped / minutesSinceTyping, 2) : 0;
   const wpm = Math.round(cpm/numberOfCharsinAWord, 2);
   const typeableChars = sum(text.map(x => x.length));
+  const charsToType =  typeableChars - charsTyped;
 
   return {
-    typeableChars,
-    typingFinished,
-    charsTyped,
-    minutesSinceTyping,
+    charsToType,
+    timeElapsed,
     numberOfErrors,
     wpm,
     cpm,

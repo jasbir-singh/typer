@@ -22,6 +22,8 @@ class Text extends Component {
   }
 
   keyPress(key) {
+    key.preventDefault();
+
     const {
       text,
       currentPosition,
@@ -66,30 +68,33 @@ class Text extends Component {
       .props
       .text
       .map((t, i) =>
-           (<Paragraph
-            key={i}
-            text={t}
-            {
-              ...{
-                errorPosition,
-                currentPosition,
-                currentPara,
-              }
+        (<Paragraph
+          key={i}
+          text={t}
+          {
+            ...{
+              errorPosition,
+              currentPosition,
+              currentPara,
             }
-            paraIndex={i}
-            className={`para-${i}`}> >
-            </Paragraph>
-           )
-          );
+          }
+          paraIndex={i}
+          className={`para-${i}`}> >
+        </Paragraph>
+        )
+      );
   }
 
   render() {
     return (
-        <StyledText>
+      <StyledText className="">
         {
           this.paragraphs()
         }
-        <p><em>{this.props.title}</em></p>
+
+        {
+          this.props.title && <p><em>{this.props.title}</em></p>
+        }
       </StyledText>
     );
   }
