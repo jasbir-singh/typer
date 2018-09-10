@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
-import Text from './Text';
-import TypingStats from './TypingStats';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
+
+import TextWithSpinner from './TextWithSpinner';
+import TypingStats from './TypingStats';
 import WikipediaButton from './WikipediaButton';
-import Spinner from 'react-spinkit';
 
 const StyledApp = styled.div`
   height: 100%;
@@ -29,10 +29,11 @@ class App extends Component {
 
   currentlyTyping() {
     return (
-      <div>
-        {
-          this.props.loading ? <Spinner style={ { width:'50%', height: '10rem' } } name="ball-clip-rotate-multiple" /> : <Text />
-        }
+      <div className="container">
+        <div>
+          <TextWithSpinner />
+          <WPM />
+        </div>
         <TypingStats />
         <WikipediaButton />
       </div>

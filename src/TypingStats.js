@@ -4,6 +4,7 @@ import { updateTypingStats } from './actions';
 import styled from 'styled-components';
 
 const CurrentlyTypedStats = ({
+  typeableChars,
   charsTyped,
   minutesSinceTyping,
   numberOfErrors,
@@ -12,7 +13,7 @@ const CurrentlyTypedStats = ({
 }) => (
   <StyledTypingStats>
     <p>
-      Chars to type: { charsTyped }
+      Chars to type: { typeableChars - charsTyped }
     </p>
     <p>
       Chars incorrectly typed: { numberOfErrors }
@@ -98,6 +99,7 @@ const mapStateToProps = (
   const typeableChars = sum(text.map(x => x.length));
 
   return {
+    typeableChars,
     typingFinished,
     charsTyped,
     minutesSinceTyping,
