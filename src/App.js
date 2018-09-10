@@ -17,11 +17,13 @@ class App extends Component {
   }
 
   currentlyTyping() {
+    const { loading } = this.props;
+
     return (
       <div className="container">
         <div className="border p-5">
           <TypingStats />
-          <TextWithSpinner />
+          <TextWithSpinner loading={loading} />
           <WikipediaButton />
         </div>
       </div>

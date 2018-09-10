@@ -31,7 +31,7 @@ const Paragraph = ({ text, currentPosition, currentPara, errorPosition, paraInde
   };
 
   return (
-    <StyledParagraph>
+    <StyledParagraph className="pb-3">
       {
         text
           .split('')

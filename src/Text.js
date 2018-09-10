@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import {
+  fetchRandomArticle,
   typeSuccess,
   typeStarted,
   typeFail,
   typeFinished,
-  fetchRandomArticle,
 } from './actions';
 import styled from 'styled-components';
 import Paragraph from './Paragraph';
@@ -32,10 +32,11 @@ class Text extends Component {
       typeStarted,
       typeSuccess,
       typeFail,
-      typeFinished
+      typeFinished,
+      startedTypingAt,
     } = this.props;
 
-    if (currentPosition === 0) typeStarted();
+    if ((currentPosition === 0) && !startedTypingAt) typeStarted();
 
     if (key.key === charToType) {
       if ((currentPara === (text.length - 1)) && (text[currentPara].length - 1 === currentPosition)) {
@@ -87,7 +88,7 @@ class Text extends Component {
 
   render() {
     return (
-      <StyledText className="">
+      <StyledText className="text-justify">
         {
           this.paragraphs()
         }
@@ -107,14 +108,15 @@ const mapStateToProps = state => ({
   currentPara: state.currentPara,
   charToType: state.charToType,
   errorPosition: state.errorPosition,
+  startedTypingAt: state.startedTypingAt,
 });
 
 const mapDispatchToProps = {
+  fetchRandomArticle,
   typeSuccess,
   typeStarted,
   typeFail,
   typeFinished,
-  fetchRandomArticle,
 };
 
 export default connect(

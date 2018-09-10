@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Text from './Text';
-import Spinner from 'react-spinkit';
+import {
+  Wave
+} from 'better-react-spinkit';
 
 const TextWithSpinner = ({ loading }) => (
     <div>
     {
-      loading ? <Spinner style={ { width:'50%', height: '10rem' } } name="ball-clip-rotate-multiple" /> : <Text />
+      loading ? <Wave size={200} /> : <Text />
     }
   </div>
 );
