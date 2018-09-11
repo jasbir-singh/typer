@@ -7,7 +7,6 @@ export const TYPE_FINISHED = 'TYPE_FINISHED';
 export const FETCH_RANDOM_ARTICLE_SUCCESS = 'FETCH_RANDOM_ARTICLE_SUCCESS';
 export const FETCH_RANDOM_ARTICLE = 'FETCH_RANDOM_ARTICLE';
 
-//
 // https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=Stack%20Overflow
 const typeStarted = () => ({
   type: TYPE_STARTED,
@@ -21,7 +20,6 @@ const typeSuccess = (key, currentPosition) => ({
   type: TYPE_SUCCESS,
   payload: {
     lastKeyTyped: key.key,
-    // currentTime: Date.now(),
   }
 });
 
@@ -34,7 +32,10 @@ const typeFail = (key) => ({
 
 const typeFinished = () => ({
   type: TYPE_FINISHED,
-  payload: {}
+  payload: {
+    typingFinished: true,
+    typingStarted: false,
+  }
 });
 
 const updateTypingStats = () => ({
@@ -44,7 +45,12 @@ const updateTypingStats = () => ({
   }
 });
 
-const fetchRandomArticle = () => ({ type: 'FETCH_RANDOM_ARTICLE', payload: { loading: true } });
+const fetchRandomArticle = () => (
+  {
+    type: 'FETCH_RANDOM_ARTICLE',
+    payload: { loading: true }
+  }
+);
 
 export {
   typeSuccess,

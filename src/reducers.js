@@ -31,17 +31,12 @@ export default (state = initialState, action) => {
   case FETCH_RANDOM_ARTICLE:
   case FETCH_RANDOM_ARTICLE_SUCCESS:
   case UPDATE_TYPING_STATS:
-  case TYPE_STARTED:
-    return {
-      ...state,
-      ...action.payload,
-    };
   case TYPE_FINISHED:
+  case TYPE_STARTED:
+    console.log(action);
     return {
       ...state,
       ...action.payload,
-      typingFinished: true,
-      typingStarted: false,
     };
   case TYPE_SUCCESS:
     let currentPara;
