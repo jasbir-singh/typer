@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateTypingStats } from './actions';
-import { sum, roundTo2Dp } from './utils.js';
+import {
+  sum,
+  roundTo2Dp,
+  minutesSinceTyping,
+  charsPerMin,
+  wordsPerMin,
+} from './utils.js';
 
 const TypingStatsBar = ({
   charsToType,
@@ -81,7 +87,6 @@ class TypingStats extends Component {
   }
 }
 
-const numberOfCharsinAWord = 5;
 const mapStateToProps = (
   {
     numberOfErrors,
@@ -94,16 +99,16 @@ const mapStateToProps = (
   }
 ) => {
   const timeElapsed = (currentTime - startedTypingAt)/1000;
-  const minutesSinceTyping = (timeElapsed/60) || 0;
   const charsTyped = sum(text.slice(0, currentPara).map(x => x.length)) + currentPosition;
-  const cpm = charsTyped && minutesSinceTyping ? Math.round(charsTyped / minutesSinceTyping, 2) : 0;
-  const wpm = Math.round(cpm/numberOfCharsinAWord, 2);
+  const cpm = charsPerMin(charsTyped, timeElapsed);
+  const wpm = wordsPerMin(cpm);
   const typeableChars = sum(text.map(x => x.length));
   const charsToType =  typeableChars - charsTyped;
 
   return {
     charsToType,
     timeElapsed,
+    typingFinished,
     numberOfErrors,
     wpm,
     cpm,
