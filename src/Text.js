@@ -17,10 +17,6 @@ const  StyledText = styled.div`
 `;
 
 class Text extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   keyPress(key) {
     key.preventDefault();
 

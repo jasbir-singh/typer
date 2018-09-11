@@ -11,8 +11,8 @@ export const FETCH_RANDOM_ARTICLE = 'FETCH_RANDOM_ARTICLE';
 const typeStarted = () => ({
   type: TYPE_STARTED,
   payload: {
-    startedTypingAt: (new Date).getTime(),
-    currentTime: (new Date).getTime(),
+    startedTypingAt: (new Date()).getTime(),
+    currentTime: (new Date()).getTime(),
   }
 });
 
@@ -41,7 +41,7 @@ const typeFinished = () => ({
 const updateTypingStats = () => ({
   type: UPDATE_TYPING_STATS,
   payload: {
-    currentTime: (new Date).getTime()
+    currentTime: (new Date()).getTime()
   }
 });
 
