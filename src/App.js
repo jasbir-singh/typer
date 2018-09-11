@@ -20,12 +20,10 @@ class App extends Component {
     const { loading } = this.props;
 
     return (
-      <div className="container">
-        <div className="border p-5">
-          <TypingStats />
-          <TextWithSpinner loading={loading} />
-          <WikipediaButton />
-        </div>
+      <div>
+        <TypingStats />
+        <TextWithSpinner loading={loading} />
+        <WikipediaButton />
       </div>
     )
   }
