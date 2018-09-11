@@ -4,14 +4,14 @@ import { updateTypingStats } from './actions';
 import { sum, roundTo2Dp } from './utils.js';
 
 const TypingStatsBar = ({
-charsToType,
-timeElapsed,
-numberOfErrors,
-wpm,
-cpm,
+  charsToType,
+  timeElapsed,
+  numberOfErrors,
+  wpm,
+  cpm,
 }) => (
-<div className="d-flex align-content-center mt-4 mb-4">
-  <div className="border flex-fill">
+  <div className="d-flex align-content-center mt-4 mb-4">
+    <div className="border flex-fill">
       <span style={{ fontSize: '3rem' }}>
         { wpm }
       </span>
@@ -60,19 +60,16 @@ class TypingStats extends Component {
   startLoop() {
     if (!this._loop) {
       this._loop = setInterval(this.loop.bind(this), 800);
-      /* this._loop = window.requestAnimationFrame(this.loop.bind(this)); */
     }
   }
 
   loop() {
     this.props.updateTypingStats();
-    /* this._loop = window.requestAnimationFrame(this.loop.bind(this)) */
   }
 
   stopLoop() {
     console.log('Stop loop');
     clearInterval(this._loop);
-    /* window.cancelAnimationFrame(this._loop); */
   }
 
   render() {
