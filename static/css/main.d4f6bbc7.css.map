@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.css"],"names":[],"mappings":"AAAA,KACE,SACA,UACA,WAEA,gBACA,yBAA6B","file":"static/css/main.d4f6bbc7.css","sourcesContent":["body {\n  margin: 0;\n  padding: 0;\n  color: black;\n  /* background-color: #FFEDD7; */\n  font-weight: 400;\n  font-family: \"IBM Plex Mono\";\n}\n\n\n\n// WEBPACK FOOTER //\n// ./src/index.css"],"sourceRoot":""}
