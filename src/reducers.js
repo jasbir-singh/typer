@@ -16,7 +16,10 @@ const text2 = `When I was five years old, my father bought a little yellow-haire
 // const text1 = `First line.`;
 // const text2 = `Second line.`;
 
-const text = [text1, text2];
+const text = [
+  text1,
+  text2
+];
 const initialState = {
   text: text,
   currentPosition: 0,
@@ -33,7 +36,6 @@ export default (state = initialState, action) => {
   case UPDATE_TYPING_STATS:
   case TYPE_FINISHED:
   case TYPE_STARTED:
-    console.log(action);
     return {
       ...state,
       ...action.payload,

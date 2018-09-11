@@ -88,7 +88,7 @@ class Text extends Component {
 
   render() {
     return (
-      <StyledText className="text-justify">
+      <StyledText className="text-justify jumbotron">
         {
           this.paragraphs()
         }

@@ -9,50 +9,24 @@ import {
   wordsPerMin,
 } from './utils.js';
 
-const TypingStatsBar = ({
-  charsToType,
-  timeElapsed,
-  numberOfErrors,
-  wpm,
-  cpm,
-}) => (
-  <div className="d-flex align-content-center mt-4 mb-4">
-    <div className="border flex-fill">
-      <span style={{ fontSize: '3rem' }}>
-        { wpm }
-      </span>
-      WPM
-    </div>
-
-    <div className="border flex-fill">
-      <span style={{ fontSize: '3rem' }}>
-        { cpm }
-      </span>
-      CPM
-    </div>
-
-    <div className="border flex-fill">
-      <span style={{ fontSize: '3rem' }}>
-        { timeElapsed || 0 }
-      </span>
-      s elapsed
-    </div>
-
-    <div className="border flex-fill">
-      <span style={{ fontSize: '3rem' }}>
-        { charsToType }
-      </span>
-      chars to type
-    </div>
-
-    <div className="border flex-fill">
-      <span style={{ fontSize: '3rem' }}>
-        { numberOfErrors }
-      </span>
-      errors
-    </div>
+const Stat = ({ stat, text }) => (
+  <div className="border flex-fill text-center">
+    <span style={{ fontSize: '3rem' }}>
+      { stat }
+    </span>
+    { text }
   </div>
-);
+)
+
+const TypingStatsBar = ({ stats }) => {
+  return (
+    <div className="d-flex align-content-center mt-4 mb-4">
+      {
+        stats.map((props) => <Stat {...props} />)
+      }
+    </div>
+  );
+};
 
 class TypingStats extends Component {
   componentDidMount() {
@@ -74,15 +48,47 @@ class TypingStats extends Component {
   }
 
   stopLoop() {
-    console.log('Stop loop');
     clearInterval(this._loop);
+  }
+
+  stats () {
+    const {
+      charsToType,
+      timeElapsed,
+      numberOfErrors,
+      wpm,
+      cpm
+    } = this.props;
+
+    return [
+      {
+        stat: wpm,
+        text: 'WPM'
+      },
+      {
+        stat: cpm,
+        text: 'CPM'
+      },
+      {
+        stat: timeElapsed || 0,
+        text: 's elapsed'
+      },
+      {
+        stat: charsToType,
+        text: 'chars to type'
+      },
+      {
+        stat: numberOfErrors,
+        text: 'errors',
+      }
+    ]
   }
 
   render() {
     if (this.props.typingFinished) this.stopLoop();
 
     return (
-      <TypingStatsBar {...this.props} />
+      <TypingStatsBar stats={this.stats()} />
     );
   }
 }

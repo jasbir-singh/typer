@@ -32,8 +32,10 @@ class App extends Component {
     const { typingFinished } = this.props;
     console.log(`Typing finished ${typingFinished}`);
     return (
-      <div className="App flex-container">
+      <div className="container">
+        <div className="border p-5">
           { typingFinished ? this.typingSummary() :  this.currentlyTyping() }
+        </div>
       </div>
     );
   }
