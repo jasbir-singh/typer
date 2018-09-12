@@ -1,3 +1,5 @@
+import { Map, OrderedSet } from 'immutable';
+
 import {
   RESET_TYPING_STATE,
   TYPE_STARTED,
@@ -20,7 +22,7 @@ export const nullState = {
     paragraph: 0,
   },
   numberOfErrors: 0,
-  errorPositions: [],
+  errorPositions: OrderedSet(),
   typingFinished: false,
 };
 
@@ -48,12 +50,13 @@ export default (state = initialState, action) => {
       lastKeyTyped,
       errorPosition
     } = action.payload;
-
+    const { errorPositions } = state;
+    const newErrorPosition = Map(errorPosition);
     return {
       ...state,
       lastKeyTyped,
       numberOfErrors: state.numberOfErrors + 1,
-      errorPositions: [...state.errorPositions, errorPosition],
+      errorPositions: errorPositions.has(newErrorPosition) ? errorPositions : errorPositions.add(newErrorPosition),
     };
   default:
     return state;
