@@ -40,57 +40,12 @@ export default (state = initialState, action) => {
   case FETCH_RANDOM_ARTICLE_SUCCESS:
   case UPDATE_TYPING_STATS:
   case TYPE_FINISHED:
+  case TYPE_SUCCESS:
   case TYPE_STARTED:
     return {
       ...state,
       ...action.payload,
     };
-  case TYPE_SUCCESS:
-    const { text, position } = state;
-
-    let newPosition;
-    const isWordFinished = text[position.paragraph][position.word].length === position.char + 1;
-    const isLastWordOfPara = text[position.paragraph].length === position.word + 1;
-    const isLastPara = text.length === position.paragraph + 1;
-
-    if (isLastPara && isLastWordOfPara && isWordFinished ) {
-      return {
-        ...state,
-        typingFinished: true,
-        position: {
-          paragraph: 0,
-          word: 0,
-          char: 0
-        }
-      };
-    };
-
-    if (isLastWordOfPara && isWordFinished) {
-      newPosition = {
-        ...position,
-        paragraph: position.paragraph + 1,
-        word: 0,
-        char: 0,
-      };
-    } else if (isWordFinished) {
-      newPosition = {
-        ...position,
-        word: position.word + 1,
-        char: 0,
-      };
-    } else {
-      newPosition = {
-        ...position,
-        char: position.char + 1,
-      };
-    };
-
-    return {
-      ...state,
-      wordToType: text[newPosition.paragraph][newPosition.word],
-      position: newPosition,
-    };
-
   case TYPE_FAIL:
     return {
       ...state,

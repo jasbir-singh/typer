@@ -6,6 +6,7 @@ import {
   typeStarted,
   typeFail,
   typeFinished,
+  handleSuccesfulTypedKey,
 } from './actions';
 import styled from 'styled-components';
 import Paragraph from './Paragraph';
@@ -23,27 +24,19 @@ class Text extends Component {
     const {
       text,
       position,
-      currentPosition,
-      currentPara,
       wordToType,
-      charToType,
       typeStarted,
-      typeSuccess,
+      handleSuccesfulTypedKey,
       typeFail,
-      typeFinished,
       startedTypingAt,
     } = this.props;
 
     if ((position.word === 0) && !startedTypingAt) typeStarted();
 
     if (key.key === wordToType[position.char]) {
-      if ((currentPara === (text.length - 1)) && (text[currentPara].length - 1 === currentPosition)) {
-        typeFinished();
-      } else {
-        typeSuccess(key);
-      };
+      handleSuccesfulTypedKey(key, position, text);
     } else {
-      typeFail(key, charToType);
+      typeFail(key.key, wordToType[position.char]);
     };
   }
 
@@ -97,6 +90,7 @@ const mapDispatchToProps = {
   typeStarted,
   typeFail,
   typeFinished,
+  handleSuccesfulTypedKey,
 };
 
 export default connect(

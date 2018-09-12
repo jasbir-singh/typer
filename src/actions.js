@@ -16,17 +16,18 @@ const typeStarted = () => ({
   }
 });
 
-const typeSuccess = (key) => ({
+const typeSuccess = ({ paragraph, char, word, text}) => ({
   type: TYPE_SUCCESS,
   payload: {
-    lastKeyTyped: key.key,
+    position: { paragraph, char, word },
+    wordToType: text[paragraph][word]
   }
 });
 
 const typeFail = (key) => ({
   type: TYPE_FAIL,
   payload: {
-    lastKeyTyped: key.key,
+    lastKeyTyped: key,
   }
 });
 
@@ -35,6 +36,11 @@ const typeFinished = () => ({
   payload: {
     typingFinished: true,
     typingStarted: false,
+    position: {
+      char: 0,
+      word: 0,
+      paragraph: 0,
+    }
   }
 });
 
@@ -52,7 +58,26 @@ const fetchRandomArticle = () => (
   }
 );
 
+
+const handleSuccesfulTypedKey = (key, position, text) => dispatch => {
+  const isWordFinished = text[position.paragraph][position.word].length === position.char + 1;
+  const isLastWordOfPara = text[position.paragraph].length === position.word + 1;
+  const isLastPara = text.length === position.paragraph + 1;
+
+
+  if (isLastPara && isLastWordOfPara && isWordFinished ) {
+    dispatch(typeFinished());
+  } else if (isLastWordOfPara && isWordFinished) {
+    dispatch(typeSuccess({ text, paragraph: position.paragraph + 1, word: 0, char: 0 }));
+  } else if (isWordFinished) {
+    dispatch(typeSuccess({ text , ...position, word: position.word + 1, char: 0 }));
+  } else {
+    dispatch(typeSuccess({ text, ...position, char: position.char + 1 }));
+  };
+};
+
 export {
+  handleSuccesfulTypedKey,
   typeSuccess,
   typeStarted,
   typeFail,
