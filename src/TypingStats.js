@@ -95,20 +95,19 @@ class TypingStats extends Component {
 
 const mapStateToProps = (
   {
+    position,
     numberOfErrors,
     text,
-    currentPara,
     startedTypingAt,
-    currentPosition,
     currentTime,
     typingFinished
   }
 ) => {
   const timeElapsed = (currentTime - startedTypingAt)/1000;
-  const charsTyped = sum(text.slice(0, currentPara).map(x => x.length)) + currentPosition;
+  const charsTyped = sum(text.slice(0, position.paragraph).map(x => x.length)) + sum(text[position.paragraph].slice(0, position.word).map(x => x.length)) + position.char;
   const cpm = charsPerMin(charsTyped, timeElapsed);
   const wpm = wordsPerMin(cpm);
-  const typeableChars = sum(text.map(x => x.length));
+  const typeableChars = sum(text.map(words => sum(words.map(word => word.length)) ));
   const charsToType =  typeableChars - charsTyped;
 
   return {
