@@ -16,7 +16,7 @@ const typeStarted = () => ({
   }
 });
 
-const typeSuccess = (key, currentPosition) => ({
+const typeSuccess = (key) => ({
   type: TYPE_SUCCESS,
   payload: {
     lastKeyTyped: key.key,

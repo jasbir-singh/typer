@@ -1,5 +1,6 @@
 const numberOfCharsinAWord = 5;
 
+const splitWords = arr => arr.map(t => t.match(/([^\s]+)|\s/g));
 const sum = arr => arr.reduce((a, b) => a + b, 0);
 const roundTo2Dp = num => Math.round(num, 2);
 const minutesSinceTyping = seconds => (seconds/60) || 0;
@@ -9,6 +10,7 @@ const charsPerMin = (chars, seconds) => {
 };
 
 export {
+  splitWords,
   charsPerMin,
   sum,
   roundTo2Dp,

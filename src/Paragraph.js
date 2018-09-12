@@ -1,7 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import Word from './Word.js';
 
 const StyledParagraph = styled.div`
+  .current-word {
+    background-color: blanchedalmond;
+  }
+
   .char--current {
     text-decoration: underline;
     font-weight: bolder;
@@ -17,33 +22,13 @@ const StyledParagraph = styled.div`
   }
 `;
 
-const Paragraph = ({ text, currentPosition, currentPara, errorPosition, paraIndex }) => {
-  const charToClass = (index) => {
-    if ((errorPosition === index) && (currentPara === paraIndex)) {
-      return 'char--current char--error';
-    } else if ((index === currentPosition) && (currentPara === paraIndex)) {
-      return 'char--current';
-    } else if ((paraIndex < currentPara) || ((paraIndex === currentPara) && (index < currentPosition))) {
-      return 'char--correctly-typed'
-    } else {
-      return '';
-    };
-  };
+const Paragraph = (props) => {
+  const {  text, paraIndex } = props;
 
   return (
     <StyledParagraph className="pb-3">
       {
-        text
-          .split('')
-          .map(
-            (char, j) => (
-              <span
-                key={j}
-                className={`${charToClass(j)}`}>
-                { char }
-              </span>
-            )
-          )
+        text.map((word, i) => (<Word word={word} key={i} wordIndex={i} paraIndex={paraIndex} />))
       }
     </StyledParagraph>
   );

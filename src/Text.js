@@ -22,8 +22,10 @@ class Text extends Component {
 
     const {
       text,
+      position,
       currentPosition,
       currentPara,
+      wordToType,
       charToType,
       typeStarted,
       typeSuccess,
@@ -32,13 +34,13 @@ class Text extends Component {
       startedTypingAt,
     } = this.props;
 
-    if ((currentPosition === 0) && !startedTypingAt) typeStarted();
+    if ((position.word === 0) && !startedTypingAt) typeStarted();
 
-    if (key.key === charToType) {
+    if (key.key === wordToType[position.char]) {
       if ((currentPara === (text.length - 1)) && (text[currentPara].length - 1 === currentPosition)) {
         typeFinished();
       } else {
-        typeSuccess(key, currentPosition);
+        typeSuccess(key);
       };
     } else {
       typeFail(key, charToType);
@@ -54,30 +56,13 @@ class Text extends Component {
   }
 
   paragraphs() {
-    const {
-      text,
-      currentPosition,
-      currentPara,
-      errorPosition
-    } = this.props;
-
     return this
       .props
       .text
-      .map((t, i) =>
-        (<Paragraph
-          key={i}
-          text={t}
-          {
-            ...{
-              errorPosition,
-              currentPosition,
-              currentPara,
-            }
-          }
-          paraIndex={i}
-          className={`para-${i}`}> >
-        </Paragraph>
+      .map(
+        (paragraph, i) => (
+          <Paragraph key={i} {...this.props} text={paragraph} paraIndex={i} className={`para-${i}`}> >
+          </Paragraph>
         )
       );
   }
@@ -92,7 +77,7 @@ class Text extends Component {
         {
           this.props.title && <p><em>{this.props.title}</em></p>
         }
-      </StyledText>
+      </ StyledText>
     );
   }
 }
@@ -100,9 +85,8 @@ class Text extends Component {
 const mapStateToProps = state => ({
   text: state.text,
   title: state.title,
-  currentPosition: state.currentPosition,
-  currentPara: state.currentPara,
-  charToType: state.charToType,
+  position: state.position,
+  wordToType: state.wordToType,
   errorPosition: state.errorPosition,
   startedTypingAt: state.startedTypingAt,
 });
