@@ -7,7 +7,7 @@ import {
 const TextWithSpinner = ({ loading }) => (
     <div>
     {
-      loading ? <Wave size={200} /> : <Text />
+      loading ? <Wave size={150} /> : <Text />
     }
   </div>
 );

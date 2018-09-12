@@ -10,6 +10,8 @@ const StyledParagraph = styled.div`
   .char--current {
     text-decoration: underline;
     font-weight: bolder;
+    font-size: 2rem;
+    color: green;
   };
 
   .char--correctly-typed {
