@@ -1,9 +1,9 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import * as API from './api';
-import { 
+import {
   FETCH_RANDOM_ARTICLE,
   fetchRandomArticleSuccess,
-  resetTypingState 
+  resetTypingState
 } from './actions.js'
 
 async function asyncWikiCall() {
@@ -22,7 +22,6 @@ async function asyncWikiCall() {
 }
 
 function* fetchRandomArticle(action) {
-  const test = action;
   try {
     const text = yield call(asyncWikiCall);
 
