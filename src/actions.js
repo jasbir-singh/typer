@@ -35,10 +35,11 @@ const typeSuccess = ({ paragraph, char, word, text}) => ({
   }
 });
 
-const typeFail = (key) => ({
+const typeFail = (key, errorPosition) => ({
   type: TYPE_FAIL,
   payload: {
     lastKeyTyped: key,
+    errorPosition: errorPosition
   }
 });
 
