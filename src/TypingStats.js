@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TypingStatsBar from './TypingStatsBar.js';
 import { connect } from 'react-redux';
 import { updateTypingStats } from './actions';
 import {
@@ -8,25 +9,6 @@ import {
   charsPerMin,
   wordsPerMin,
 } from './utils.js';
-
-const Stat = ({ stat, text }) => (
-  <div className="border flex-fill text-center">
-    <span style={{ fontSize: '3rem' }}>
-      { stat }
-    </span>
-    { text }
-  </div>
-)
-
-const TypingStatsBar = ({ stats }) => {
-  return (
-    <div className="d-flex align-content-center mt-4 mb-4">
-      {
-        stats.map((props, i) => <Stat key={i} {...props} />)
-      }
-    </div>
-  );
-};
 
 class TypingStats extends Component {
   componentDidMount() {
