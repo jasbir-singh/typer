@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import {
   fetchRandomArticle,
-} from './actions';
+} from '../actions';
 
 const WikipediaButton = ({ fetchRandomArticle }) => {
   return (

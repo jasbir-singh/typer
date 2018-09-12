@@ -7,7 +7,7 @@ import {
   typeFail,
   typeFinished,
   handleSuccesfulTypedKey,
-} from './actions';
+} from '../actions';
 import styled from 'styled-components';
 import Paragraph from './Paragraph';
 

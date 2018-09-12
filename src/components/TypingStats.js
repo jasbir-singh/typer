@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import TypingStatsBar from './TypingStatsBar.js';
 import { connect } from 'react-redux';
-import { updateTypingStats } from './actions';
+import { updateTypingStats } from '../actions';
 import {
   sum,
   roundTo2Dp,
   minutesSinceTyping,
   charsPerMin,
   wordsPerMin,
-} from './utils.js';
+} from '../utils.js';
 
 class TypingStats extends Component {
   componentDidMount() {

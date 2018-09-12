@@ -24,7 +24,7 @@ const typeStarted = () => {
         currentTime,
         startedTypingAt: currentTime,
       }
-  }
+  };
 };
 
 const typeSuccess = ({ paragraph, char, word, text}) => ({
