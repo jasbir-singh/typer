@@ -1,4 +1,5 @@
 const numberOfCharsinAWord = 5;
+const stripHTML = str => str.replace(/<(?:.|\n)*?>/gm, '');
 
 const splitWords = arr => arr.map(t => t.match(/([^\s]+)|\s/g));
 const sum = arr => arr.reduce((a, b) => a + b, 0);
@@ -10,6 +11,7 @@ const charsPerMin = (chars, seconds) => {
 };
 
 export {
+  stripHTML,
   splitWords,
   charsPerMin,
   sum,

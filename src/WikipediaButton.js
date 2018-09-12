@@ -7,7 +7,7 @@ import {
 
 const WikipediaButton = ({ fetchRandomArticle }) => {
   return (
-    <button className="btn btn-primary" onClick={fetchRandomArticle}>Fetch random Wiki Article</button>
+    <p className="btn btn-primary" onClick={fetchRandomArticle}>Fetch random Wiki Article</p>
   );
 };
 

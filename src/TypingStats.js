@@ -39,7 +39,7 @@ class TypingStats extends Component {
 
   startLoop() {
     if (!this._loop) {
-      this._loop = setInterval(this.loop.bind(this), 800);
+      this._loop = setInterval(this.loop.bind(this), 2000);
     }
   }
 

@@ -1,4 +1,7 @@
+import { splitWords, stripHTML } from './utils.js';
 import * as API from './api';
+import { nullState } from './reducers';
+
 export const TYPE_STARTED = 'TYPE_STARTED';
 export const TYPE_SUCCESS = 'TYPE_SUCCESS';
 export const TYPE_FAIL = 'TYPE_FAIL';
@@ -6,14 +9,23 @@ export const UPDATE_TYPING_STATS = 'UPDATE_TYPING_STATS';
 export const TYPE_FINISHED = 'TYPE_FINISHED';
 export const FETCH_RANDOM_ARTICLE_SUCCESS = 'FETCH_RANDOM_ARTICLE_SUCCESS';
 export const FETCH_RANDOM_ARTICLE = 'FETCH_RANDOM_ARTICLE';
+export const RESET_TYPING_STATE = 'RESET_TYPING_STATE';
 
-const typeStarted = () => ({
-  type: TYPE_STARTED,
-  payload: {
-    startedTypingAt: (new Date()).getTime(),
-    currentTime: (new Date()).getTime(),
-  }
+const resetTypingState = () => ({
+  type: RESET_TYPING_STATE,
+  payload: nullState
 });
+
+const typeStarted = () => {
+  const currentTime = (new Date()).getTime();
+  return {
+    type: TYPE_STARTED,
+    payload: {
+        currentTime,
+        startedTypingAt: currentTime,
+      }
+  }
+};
 
 const typeSuccess = ({ paragraph, char, word, text}) => ({
   type: TYPE_SUCCESS,
@@ -75,7 +87,21 @@ const handleSuccesfulTypedKey = (key, position, text) => dispatch => {
   };
 };
 
+const fetchRandomArticleSuccess = (rawText, title) => {
+  const text = splitWords(stripHTML(rawText).split("\n").filter(para => para.length !== 0));
+  return {
+    type: 'FETCH_RANDOM_ARTICLE_SUCCESS',
+    payload: {
+      text: text,
+      title: title,
+      wordToType: text[0][0],
+      loading: false,
+    }
+  };
+};
+
 export {
+  resetTypingState,
   handleSuccesfulTypedKey,
   typeSuccess,
   typeStarted,
@@ -83,4 +109,5 @@ export {
   typeFinished,
   updateTypingStats,
   fetchRandomArticle,
+  fetchRandomArticleSuccess,
 }

@@ -1,4 +1,5 @@
 import {
+  RESET_TYPING_STATE,
   TYPE_STARTED,
   TYPE_SUCCESS,
   TYPE_FAIL,
@@ -22,16 +23,22 @@ const text = splitWords([
   text2
 ]);
 
-const initialState = {
-  text: text,
+export const nullState = {
+  text: [['']],
+  wordToType: null,
   position: {
     word: 0,
     char: 0,
     paragraph: 0,
   },
   numberOfErrors: 0,
-  wordToType: text[0][0],
   typingFinished: false,
+}
+
+const initialState = {
+  ...nullState,
+  text: text,
+  wordToType: text[0][0],
 };
 
 export default (state = initialState, action) => {
@@ -41,6 +48,7 @@ export default (state = initialState, action) => {
   case UPDATE_TYPING_STATS:
   case TYPE_FINISHED:
   case TYPE_SUCCESS:
+  case RESET_TYPING_STATE:
   case TYPE_STARTED:
     return {
       ...state,

@@ -11,13 +11,11 @@ import {
 import styled from 'styled-components';
 import Paragraph from './Paragraph';
 
-const  StyledText = styled.div`
-  line-height: 1.6em;
-  font-size: 1.2em;
-  margin-bottom: 2em;
-`;
-
 class Text extends Component {
+  constructor(props) {
+    super(props);
+    this.keyPress = this.keyPress.bind(this);
+  }
   keyPress(key) {
     key.preventDefault();
 
@@ -31,7 +29,9 @@ class Text extends Component {
       startedTypingAt,
     } = this.props;
 
-    if ((position.word === 0) && !startedTypingAt) typeStarted();
+    if ((position.paragraph + position.word + position.char === 0) && !startedTypingAt) {
+      typeStarted();
+    };
 
     if (key.key === wordToType[position.char]) {
       handleSuccesfulTypedKey(key, position, text);
@@ -41,11 +41,13 @@ class Text extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener('keypress', this.keyPress.bind(this), false);
+    console.log(`added event listner ${this.props.text[0][0]}`);
+    document.addEventListener('keypress', this.keyPress, false);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keypress', this.keyPress.bind(this), false);
+    console.log(`removed event listner ${this.props.text[0][0]}`);
+    document.removeEventListener('keypress', this.keyPress, false);
   }
 
   paragraphs() {
@@ -54,7 +56,7 @@ class Text extends Component {
       .text
       .map(
         (paragraph, i) => (
-          <Paragraph key={i} {...this.props} text={paragraph} paraIndex={i} className={`para-${i}`}> >
+          <Paragraph key={`${paragraph}-${i}`} {...this.props} text={paragraph} paraIndex={i} className={`para-${i}`}> >
           </Paragraph>
         )
       );
@@ -62,7 +64,7 @@ class Text extends Component {
 
   render() {
     return (
-      <StyledText className="text-justify jumbotron">
+      <div className="text-justify jumbotron lead">
         {
           this.paragraphs()
         }
@@ -70,19 +72,21 @@ class Text extends Component {
         {
           this.props.title && <p><em>{this.props.title}</em></p>
         }
-      </ StyledText>
+      </ div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  text: state.text,
-  title: state.title,
-  position: state.position,
-  wordToType: state.wordToType,
-  errorPosition: state.errorPosition,
-  startedTypingAt: state.startedTypingAt,
-});
+const mapStateToProps = state => {
+  return {
+    text: state.text,
+    title: state.title,
+    position: state.position,
+    wordToType: state.wordToType,
+    errorPosition: state.errorPosition,
+    startedTypingAt: state.startedTypingAt,
+  }
+};
 
 const mapDispatchToProps = {
   fetchRandomArticle,

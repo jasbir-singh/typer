@@ -1,21 +1,10 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import * as API from './api';
-
-const fetchRandomArticleSuccess = (text, title) => ({
-  type: 'FETCH_RANDOM_ARTICLE_SUCCESS',
-  payload: {
-    text: [text],
-    title: title,
-    currentPosition: 0,
-    currentPara: 0,
-    numberOfErrors: 0,
-    charToType: text[0],
-    typingFinished: false,
-    loading: false,
-  }
-});
-
-const stripHTML = str => str.replace(/<(?:.|\n)*?>/gm, '');
+import { 
+  FETCH_RANDOM_ARTICLE,
+  fetchRandomArticleSuccess,
+  resetTypingState 
+} from './actions.js'
 
 async function asyncWikiCall() {
   let text;
@@ -29,21 +18,23 @@ async function asyncWikiCall() {
       numOfCalls++;
     };
   }
-  return text;
+  return text.extract;
 }
 
 function* fetchRandomArticle(action) {
+  const test = action;
   try {
     const text = yield call(asyncWikiCall);
 
-    yield put(fetchRandomArticleSuccess(stripHTML(text.extract), text.title));
+    yield put(resetTypingState());
+    yield put(fetchRandomArticleSuccess(text, text.title));
   } catch (e) {
     yield put({type: 'FETCH_RANDOM_ARTICLE_FAILED', message: e.message});
   }
 }
 
 function* rootSaga() {
-  yield takeLatest('FETCH_RANDOM_ARTICLE', fetchRandomArticle);
+  yield takeLatest(FETCH_RANDOM_ARTICLE, fetchRandomArticle);
 };
 
 export default rootSaga;
