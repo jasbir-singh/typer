@@ -10,12 +10,22 @@ const charsPerMin = (chars, seconds) => {
   return chars && minutesSinceTyping(seconds) ? Math.round(chars / minutesSinceTyping(seconds), 2) : 0;
 };
 
+const compareObjs = (obj1, obj2) =>  (JSON.stringify(obj1) === JSON.stringify(obj2));
+
+const arrayContains = (arr, needle) => {
+  for (let i in arr) {
+    if (compareObjs(arr[i], needle)) return true;
+  }
+  return false;
+};
+
 export {
   stripHTML,
   splitWords,
   charsPerMin,
   sum,
   roundTo2Dp,
+  arrayContains,
   minutesSinceTyping,
   wordsPerMin,
 };
