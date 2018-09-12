@@ -1,10 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import * as API from './api';
-import { 
+import {
+  FETCH_RANDOM_ARTICLE_FAILED,
   FETCH_RANDOM_ARTICLE,
   fetchRandomArticleSuccess,
-  resetTypingState 
-} from './actions.js'
+  resetTypingState
+} from './actions.js';
 
 async function asyncWikiCall() {
   let text;
@@ -29,7 +30,7 @@ function* fetchRandomArticle(action) {
     yield put(resetTypingState());
     yield put(fetchRandomArticleSuccess(text.extract, text.title));
   } catch (e) {
-    yield put({type: 'FETCH_RANDOM_ARTICLE_FAILED', message: e.message});
+    yield put({type: FETCH_RANDOM_ARTICLE_FAILED, message: e.message});
   }
 }
 

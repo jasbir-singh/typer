@@ -2,6 +2,7 @@ import { splitWords, stripHTML } from './utils.js';
 import * as API from './api';
 import { nullState } from './reducers';
 
+export const FETCH_RANDOM_ARTICLE_FAILED = 'FETCH_RANDOM_ARTICLE_FAILED';
 export const TYPE_STARTED = 'TYPE_STARTED';
 export const TYPE_SUCCESS = 'TYPE_SUCCESS';
 export const TYPE_FAIL = 'TYPE_FAIL';
