@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
+import InputBox from './InputBox.js';
 import {
   fetchRandomArticle,
   typeSuccess,
@@ -64,7 +65,7 @@ class Text extends Component {
 
   render() {
     return (
-      <div className="text-justify jumbotron lead">
+      <div className="text-justify jumbotron">
         {
           this.paragraphs()
         }
@@ -72,6 +73,8 @@ class Text extends Component {
         {
           this.props.title && <p><em>{this.props.title}</em></p>
         }
+
+        <InputBox />
       </ div>
     );
   }

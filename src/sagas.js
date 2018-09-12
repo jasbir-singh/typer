@@ -18,7 +18,7 @@ async function asyncWikiCall() {
       numOfCalls++;
     };
   }
-  return text.extract;
+  return text;
 }
 
 function* fetchRandomArticle(action) {
@@ -27,7 +27,7 @@ function* fetchRandomArticle(action) {
     const text = yield call(asyncWikiCall);
 
     yield put(resetTypingState());
-    yield put(fetchRandomArticleSuccess(text, text.title));
+    yield put(fetchRandomArticleSuccess(text.extract, text.title));
   } catch (e) {
     yield put({type: 'FETCH_RANDOM_ARTICLE_FAILED', message: e.message});
   }
