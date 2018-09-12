@@ -37,17 +37,15 @@ class Text extends Component {
     if (key.key === wordToType[position.char]) {
       handleSuccesfulTypedKey(key, position, text);
     } else {
-      typeFail(key.key, wordToType[position.char]);
+      typeFail(key.key, position);
     };
   }
 
   componentDidMount() {
-    console.log(`added event listner ${this.props.text[0][0]}`);
     document.addEventListener('keypress', this.keyPress, false);
   }
 
   componentWillUnmount() {
-    console.log(`removed event listner ${this.props.text[0][0]}`);
     document.removeEventListener('keypress', this.keyPress, false);
   }
 

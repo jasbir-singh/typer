@@ -20,6 +20,7 @@ export const nullState = {
     paragraph: 0,
   },
   numberOfErrors: 0,
+  errorPositions: [],
   typingFinished: false,
 };
 
@@ -43,11 +44,16 @@ export default (state = initialState, action) => {
       ...action.payload,
     };
   case TYPE_FAIL:
+    const {
+      lastKeyTyped,
+      errorPosition
+    } = action.payload;
+
     return {
       ...state,
-      ...action.payload,
+      lastKeyTyped,
       numberOfErrors: state.numberOfErrors + 1,
-      errorPosition: state.currentPosition,
+      errorPositions: [...state.errorPositions, errorPosition],
     };
   default:
     return state;
