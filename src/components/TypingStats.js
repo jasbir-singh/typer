@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import TypingStatsBar from './TypingStatsBar.js';
 import { connect } from 'react-redux';
 import { updateTypingStats } from '../actions';
+import { getPosition, getWordToType } from '../stateTransformers';
+
 import {
   sum,
   roundTo2Dp,
@@ -67,7 +69,7 @@ class TypingStats extends Component {
   }
 
   render() {
-    if (this.props.typingFinished) this.stopLoop();
+    if (this.props.typingFinishedAt) this.stopLoop();
 
     return (
       <TypingStatsBar stats={this.stats()} />
@@ -75,28 +77,26 @@ class TypingStats extends Component {
   }
 }
 
-const mapStateToProps = (
-  {
-    position,
-    numberOfErrors,
-    text,
-    startedTypingAt,
-    currentTime,
-    typingFinished
-  }
-) => {
-  const timeElapsed = (currentTime - startedTypingAt)/1000;
+const mapStateToProps = (state) => {
+  const { time, text } = state;
+  const { current, startedAt, finishedAt } = time;
+
+  const position = getPosition(state);
+  const timeElapsed = ((finishedAt || current) - startedAt)/1000;
   const charsTyped = sum(text.slice(0, position.paragraph).map(x => x.length)) + sum(text[position.paragraph].slice(0, position.word).map(x => x.length)) + position.char;
   const cpm = charsPerMin(charsTyped, timeElapsed);
   const wpm = wordsPerMin(cpm);
   const typeableChars = sum(text.map(words => sum(words.map(word => word.length)) ));
   const charsToType =  typeableChars - charsTyped;
 
+
+  console.log(`numberOfErrors ${state.errors.length}`);
+
   return {
     charsToType,
     timeElapsed,
-    typingFinished,
-    numberOfErrors,
+    typingFinishedAt: state.time.finishedAt,
+    numberOfErrors: state.errors.size,
     wpm,
     cpm,
   }

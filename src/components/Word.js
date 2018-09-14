@@ -2,6 +2,7 @@ import { Map } from 'immutable';
 import React from 'react';
 import { connect } from 'react-redux';
 import { arrayContains } from '../utils';
+import { lastElement } from '../utils';
 
 const Word = ({ word, position, paraIndex, wordIndex, errorPositions }) => {
   const wordClassName = paraIndex === position.paragraph && wordIndex === position.word ? 'current-word' : null;
@@ -24,8 +25,8 @@ const Word = ({ word, position, paraIndex, wordIndex, errorPositions }) => {
 };
 
 const mapStateToProps = (state) => ({
-  position: state.position,
-  errorPositions: state.errorPositions,
+  position: lastElement(state.positions),
+  errorPositions: state.errors,
 });
 
 export default connect(

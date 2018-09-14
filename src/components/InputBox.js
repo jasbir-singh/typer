@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getPosition, getWordToType } from '../stateTransformers';
 
 const InputBox = ({ wordToType, position }) => (
-  <div class="input-group input-group-lg m-2">
-    <input type="text" placeholder={wordToType.slice(0, position.char)} class="form-control" />
+  <div className="input-group input-group-lg m-2">
+    <input type="text" placeholder={wordToType.slice(0, position.char)} className="form-control" />
   </div>
 );
 
-const mapStateToProps = ({ wordToType, position }) => ({
-  wordToType, position
-});
+const mapStateToProps = (state) => {
+  const position = getPosition(state);
+  const wordToType = getWordToType(state);
+
+  return {
+    wordToType,
+    position
+  }
+};
 
 export default connect(
   mapStateToProps,

@@ -18,6 +18,7 @@ const arrayContains = (arr, needle) => {
   }
   return false;
 };
+export const lastElement =  arr => arr[arr.length - 1];
 
 export {
   stripHTML,

@@ -29,11 +29,11 @@ class App extends Component {
   }
 
   render() {
-    const { typingFinished } = this.props;
+    const { typingFinishedAt } = this.props;
     return (
       <div className="container-fluid">
         <div className="p-2">
-          { typingFinished ? this.typingSummary() :  this.currentlyTyping() }
+          { typingFinishedAt ? this.typingSummary() :  this.currentlyTyping() }
         </div>
       </div>
     );
@@ -41,7 +41,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  typingFinished: state.typingFinished,
+  typingFinishedAt: state.time.finishedAt,
   loading: state.loading
 });
 

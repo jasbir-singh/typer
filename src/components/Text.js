@@ -12,6 +12,9 @@ import {
 import styled from 'styled-components';
 import Paragraph from './Paragraph';
 
+import { lastElement } from '../utils';
+import { getPosition, getWordToType } from '../stateTransformers';
+
 class Text extends Component {
   constructor(props) {
     super(props);
@@ -79,14 +82,16 @@ class Text extends Component {
 }
 
 const mapStateToProps = state => {
+  const position = getPosition(state);
+  const wordToType = getWordToType(state);
+
   return {
     text: state.text,
     title: state.title,
-    position: state.position,
-    wordToType: state.wordToType,
-    errorPosition: state.errorPosition,
-    startedTypingAt: state.startedTypingAt,
-  }
+    position,
+    wordToType,
+    startedTypingAt: state.time.startedAt,
+  };
 };
 
 const mapDispatchToProps = {

@@ -1,6 +1,5 @@
 import { splitWords, stripHTML } from './utils.js';
 import * as API from './api';
-import { nullState } from './reducers';
 
 export const TYPE_STARTED = 'TYPE_STARTED';
 export const TYPE_SUCCESS = 'TYPE_SUCCESS';
@@ -13,60 +12,48 @@ export const RESET_TYPING_STATE = 'RESET_TYPING_STATE';
 
 const resetTypingState = () => ({
   type: RESET_TYPING_STATE,
-  payload: nullState
+  // payload: nullState
 });
 
 const typeStarted = () => {
-  const currentTime = (new Date()).getTime();
+  const current = (new Date()).getTime();
   return {
     type: TYPE_STARTED,
     payload: {
-        currentTime,
-        startedTypingAt: currentTime,
+        current,
+        startedAt: current,
       }
   };
 };
 
 const typeSuccess = ({ paragraph, char, word, text}) => ({
   type: TYPE_SUCCESS,
-  payload: {
-    position: { paragraph, char, word },
-    wordToType: text[paragraph][word]
-  }
+  payload: { paragraph, char, word }
 });
 
 const typeFail = (key, errorPosition) => ({
   type: TYPE_FAIL,
-  payload: {
-    lastKeyTyped: key,
-    errorPosition: errorPosition
-  }
+  payload: errorPosition,
 });
 
 const typeFinished = () => ({
   type: TYPE_FINISHED,
   payload: {
-    typingFinished: true,
-    typingStarted: false,
-    position: {
-      char: 0,
-      word: 0,
-      paragraph: 0,
-    }
+    finishedAt: (new Date()).getTime(),
   }
 });
 
 const updateTypingStats = () => ({
   type: UPDATE_TYPING_STATS,
   payload: {
-    currentTime: (new Date()).getTime()
+    current: (new Date()).getTime()
   }
 });
 
 const fetchRandomArticle = () => (
   {
     type: 'FETCH_RANDOM_ARTICLE',
-    payload: { loading: true }
+    // payload: { loading: true }
   }
 );
 
@@ -75,7 +62,6 @@ const handleSuccesfulTypedKey = (key, position, text) => dispatch => {
   const isWordFinished = text[position.paragraph][position.word].length === position.char + 1;
   const isLastWordOfPara = text[position.paragraph].length === position.word + 1;
   const isLastPara = text.length === position.paragraph + 1;
-
 
   if (isLastPara && isLastWordOfPara && isWordFinished ) {
     dispatch(typeFinished());
@@ -92,12 +78,7 @@ const fetchRandomArticleSuccess = (rawText, title) => {
   const text = splitWords(stripHTML(rawText).split("\n").filter(para => para.length !== 0));
   return {
     type: 'FETCH_RANDOM_ARTICLE_SUCCESS',
-    payload: {
-      text: text,
-      title: title,
-      wordToType: text[0][0],
-      loading: false,
-    }
+    payload: text// loading: false,
   };
 };
 
