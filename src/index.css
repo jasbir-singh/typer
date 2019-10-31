@@ -1,6 +1,7 @@
 body {
-  margin: 0;
+  margin: auto;
   padding: 0;
+  width: 936px;
   color: black;
   /* background-color: #FFEDD7; */
   font-weight: 400;
