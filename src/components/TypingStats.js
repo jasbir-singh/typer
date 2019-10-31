@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import { updateTypingStats } from '../actions';
 import {
   sum,
-  roundTo2Dp,
-  minutesSinceTyping,
   charsPerMin,
   wordsPerMin,
 } from '../utils.js';

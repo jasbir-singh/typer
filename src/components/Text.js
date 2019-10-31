@@ -9,7 +9,6 @@ import {
   typeFinished,
   handleSuccesfulTypedKey,
 } from '../actions';
-import styled from 'styled-components';
 import Paragraph from './Paragraph';
 
 class Text extends Component {

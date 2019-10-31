@@ -22,8 +22,7 @@ async function asyncWikiCall() {
   return text;
 }
 
-function* fetchRandomArticle(action) {
-  const test = action;
+function* fetchRandomArticle(_) {
   try {
     const text = yield call(asyncWikiCall);
 
