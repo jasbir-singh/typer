@@ -61,7 +61,7 @@ class TypingStats extends Component {
         stat: numberOfErrors,
         text: 'errors',
       }
-    ]
+    ];
   }
 
   render() {
@@ -97,7 +97,7 @@ const mapStateToProps = (
     numberOfErrors,
     wpm,
     cpm,
-  }
+  };
 };
 
 export default connect(

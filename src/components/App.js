@@ -25,7 +25,7 @@ class App extends Component {
         <TextWithSpinner loading={loading} />
         <WikipediaButton />
       </div>
-    )
+    );
   }
 
   render() {
