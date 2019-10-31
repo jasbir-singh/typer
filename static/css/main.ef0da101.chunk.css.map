@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.css"],"names":[],"mappings":"AAAA,KACE,WAAY,CACZ,SAAU,CACV,WAAY,CACZ,UAAY,CAEZ,eAAgB,CAChB,yBACF","file":"main.ef0da101.chunk.css","sourcesContent":["body {\n  margin: auto;\n  padding: 0;\n  width: 936px;\n  color: black;\n  /* background-color: #FFEDD7; */\n  font-weight: 400;\n  font-family: \"IBM Plex Mono\";\n}\n"]}
