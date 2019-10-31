@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import * as API from './api';
+import * as API from './lib/api';
 import {
   FETCH_RANDOM_ARTICLE_FAILED,
   FETCH_RANDOM_ARTICLE,
