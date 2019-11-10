@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/typer/static/css/main.ef0da101.chunk.css",
-    "main.js": "/typer/static/js/main.6eba485d.chunk.js",
-    "main.js.map": "/typer/static/js/main.6eba485d.chunk.js.map",
+    "main.css": "/typer/static/css/main.d08b6b31.chunk.css",
+    "main.js": "/typer/static/js/main.4baedc9a.chunk.js",
+    "main.js.map": "/typer/static/js/main.4baedc9a.chunk.js.map",
     "runtime-main.js": "/typer/static/js/runtime-main.314b5513.js",
     "runtime-main.js.map": "/typer/static/js/runtime-main.314b5513.js.map",
     "static/js/2.b10e9ea6.chunk.js": "/typer/static/js/2.b10e9ea6.chunk.js",
     "static/js/2.b10e9ea6.chunk.js.map": "/typer/static/js/2.b10e9ea6.chunk.js.map",
     "index.html": "/typer/index.html",
-    "precache-manifest.ab3d0e5dacd70e3a81fe5a20c85725f4.js": "/typer/precache-manifest.ab3d0e5dacd70e3a81fe5a20c85725f4.js",
+    "precache-manifest.b5e74cf82b1a910c66639e10a27195e4.js": "/typer/precache-manifest.b5e74cf82b1a910c66639e10a27195e4.js",
     "service-worker.js": "/typer/service-worker.js",
-    "static/css/main.ef0da101.chunk.css.map": "/typer/static/css/main.ef0da101.chunk.css.map"
+    "static/css/main.d08b6b31.chunk.css.map": "/typer/static/css/main.d08b6b31.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.314b5513.js",
     "static/js/2.b10e9ea6.chunk.js",
-    "static/css/main.ef0da101.chunk.css",
-    "static/js/main.6eba485d.chunk.js"
+    "static/css/main.d08b6b31.chunk.css",
+    "static/js/main.4baedc9a.chunk.js"
   ]
 }
