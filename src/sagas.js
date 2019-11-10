@@ -11,7 +11,12 @@ async function asyncWikiCall() {
   let text;
   let numOfCalls = 0;
   while (true) {
-    if (numOfCalls > 10 || (text && !text.title.match(/user|talk|Wikipedia|Template/i) && text.extract.length > 100)) {
+    if (
+      numOfCalls > 10 ||
+      (text &&
+        !text.title.match(/user|talk|Wikipedia|Template/i) &&
+        text.extract.length > 100)
+    ) {
       break;
     } else {
       const response = await API.wikiGetRandomArticle();

@@ -12,11 +12,11 @@ const StyledParagraph = styled.div`
     font-weight: bolder;
     font-size: 2rem;
     color: green;
-  };
+  }
 
   .char--correctly-typed {
     color: green;
-  };
+  }
 
   .char--error {
     background-color: red;
@@ -24,14 +24,14 @@ const StyledParagraph = styled.div`
   }
 `;
 
-const Paragraph = (props) => {
-  const {  text, paraIndex } = props;
+const Paragraph = props => {
+  const { text, paraIndex } = props;
 
   return (
     <StyledParagraph className="pb-3">
-      {
-        text.map((word, i) => (<Word word={word} key={i} wordIndex={i} paraIndex={paraIndex} />))
-      }
+      {text.map((word, i) => (
+        <Word word={word} key={i} wordIndex={i} paraIndex={paraIndex} />
+      ))}
     </StyledParagraph>
   );
 };

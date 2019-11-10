@@ -29,15 +29,18 @@ class Text extends Component {
       startedTypingAt,
     } = this.props;
 
-    if ((position.paragraph + position.word + position.char === 0) && !startedTypingAt) {
+    if (
+      position.paragraph + position.word + position.char === 0 &&
+      !startedTypingAt
+    ) {
       typeStarted();
-    };
+    }
 
     if (key.key === wordToType[position.char]) {
       handleSuccesfulTypedKey(key, position, text);
     } else {
       typeFail(key.key, wordToType[position.char]);
-    };
+    }
   }
 
   componentDidMount() {
@@ -51,30 +54,33 @@ class Text extends Component {
   }
 
   paragraphs() {
-    return this
-      .props
-      .text
-      .map(
-        (paragraph, i) => (
-          <Paragraph key={`${paragraph}-${i}`} {...this.props} text={paragraph} paraIndex={i} className={`para-${i}`}> >
-          </Paragraph>
-        )
-      );
+    return this.props.text.map((paragraph, i) => (
+      <Paragraph
+        key={`${paragraph}-${i}`}
+        {...this.props}
+        text={paragraph}
+        paraIndex={i}
+        className={`para-${i}`}
+      >
+        {' '}
+        >
+      </Paragraph>
+    ));
   }
 
   render() {
     return (
       <div className="text-justify jumbotron">
-        {
-          this.paragraphs()
-        }
+        {this.paragraphs()}
 
-        {
-          this.props.title && <p><em>{this.props.title}</em></p>
-        }
+        {this.props.title && (
+          <p>
+            <em>{this.props.title}</em>
+          </p>
+        )}
 
         <InputBox />
-      </ div>
+      </div>
     );
   }
 }
@@ -87,7 +93,7 @@ const mapStateToProps = state => {
     wordToType: state.wordToType,
     errorPosition: state.errorPosition,
     startedTypingAt: state.startedTypingAt,
-  }
+  };
 };
 
 const mapDispatchToProps = {
@@ -99,7 +105,4 @@ const mapDispatchToProps = {
   handleSuccesfulTypedKey,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Text);
+export default connect(mapStateToProps, mapDispatchToProps)(Text);

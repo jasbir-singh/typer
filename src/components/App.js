@@ -33,18 +33,16 @@ class App extends Component {
     return (
       <div className="container-fluid">
         <div className="p-2">
-          { typingFinished ? this.typingSummary() :  this.currentlyTyping() }
+          {typingFinished ? this.typingSummary() : this.currentlyTyping()}
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   typingFinished: state.typingFinished,
-  loading: state.loading
+  loading: state.loading,
 });
 
-export default connect(
-  mapStateToProps,
-)(App);
+export default connect(mapStateToProps)(App);

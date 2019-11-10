@@ -2,11 +2,7 @@ import React, { Component } from 'react';
 import TypingStatsBar from './TypingStatsBar.js';
 import { connect } from 'react-redux';
 import { updateTypingStats } from '../actions';
-import {
-  sum,
-  charsPerMin,
-  wordsPerMin,
-} from '../utils.js';
+import { sum, charsPerMin, wordsPerMin } from '../utils.js';
 
 class TypingStats extends Component {
   componentDidMount() {
@@ -31,64 +27,59 @@ class TypingStats extends Component {
     clearInterval(this._loop);
   }
 
-  stats () {
-    const {
-      charsToType,
-      timeElapsed,
-      numberOfErrors,
-      wpm,
-      cpm
-    } = this.props;
+  stats() {
+    const { charsToType, timeElapsed, numberOfErrors, wpm, cpm } = this.props;
 
     return [
       {
         stat: wpm,
-        text: 'WPM'
+        text: 'WPM',
       },
       {
         stat: cpm,
-        text: 'CPM'
+        text: 'CPM',
       },
       {
         stat: timeElapsed || 0,
-        text: 's elapsed'
+        text: 's elapsed',
       },
       {
         stat: charsToType,
-        text: 'chars to type'
+        text: 'chars to type',
       },
       {
         stat: numberOfErrors,
         text: 'errors',
-      }
+      },
     ];
   }
 
   render() {
     if (this.props.typingFinished) this.stopLoop();
 
-    return (
-      <TypingStatsBar stats={this.stats()} />
-    );
+    return <TypingStatsBar stats={this.stats()} />;
   }
 }
 
-const mapStateToProps = (
-  {
-    position,
-    numberOfErrors,
-    text,
-    startedTypingAt,
-    currentTime,
-    typingFinished
-  }
-) => {
-  const timeElapsed = (currentTime - startedTypingAt)/1000;
-  const charsTyped = sum(text.slice(0, position.paragraph).map(x => x.length)) + sum(text[position.paragraph].slice(0, position.word).map(x => x.length)) + position.char;
+const mapStateToProps = ({
+  position,
+  numberOfErrors,
+  text,
+  startedTypingAt,
+  currentTime,
+  typingFinished,
+}) => {
+  const timeElapsed = (currentTime - startedTypingAt) / 1000;
+  const charsTyped =
+    sum(text.slice(0, position.paragraph).map(x => x.length)) +
+    sum(text[position.paragraph].slice(0, position.word).map(x => x.length)) +
+    position.char;
   const cpm = charsPerMin(charsTyped, timeElapsed);
   const wpm = wordsPerMin(cpm);
-  const typeableChars = sum(text.map(words => sum(words.map(word => word.length)) ));
-  const charsToType =  typeableChars - charsTyped;
+  const typeableChars = sum(
+    text.map(words => sum(words.map(word => word.length))),
+  );
+  const charsToType = typeableChars - charsTyped;
 
   return {
     charsToType,
@@ -100,7 +91,4 @@ const mapStateToProps = (
   };
 };
 
-export default connect(
-  mapStateToProps,
-  { updateTypingStats }
-)(TypingStats);
+export default connect(mapStateToProps, { updateTypingStats })(TypingStats);
