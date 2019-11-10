@@ -7,7 +7,4 @@ const text2 = `When I was five years old, my father bought a little yellow-haire
 // const text1 = `I am nobody.`;
 // const text2 = `Second line.`;
 
-export default splitWords([
-  text1,
-  text2
-]);
+export default splitWords([text1, text2]);
