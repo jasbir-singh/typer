@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://jasbir-singh.github.io/typer/",
   "dependencies": {
-    "axios": "^0.21.2",
+    "axios": "^1.6.0",
     "better-react-spinkit": "^2.0.4",
     "prettier": "^1.19.1",
     "react": "^16.9.0",
